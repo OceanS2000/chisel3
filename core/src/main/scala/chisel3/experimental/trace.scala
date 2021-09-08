@@ -6,15 +6,17 @@ import firrtl.AnnotationSeq
 import firrtl.annotations.{Annotation, CompleteTarget, SingleTargetAnnotation}
 import firrtl.transforms.DontTouchAnnotation
 
-// This API provides a util to trace name.
+/** The util that records the reference map from original [[Data]]/[[Module]] annotated in Chisel and final FIRRTL. */
 object trace {
 
+  /** Trace a Instance name. */
   def traceName(x: Module): Unit = {
     new ChiselAnnotation {
       def toFirrtl: Annotation = TraceNameAnnotation(x.toTarget, x.toTarget)
     }
   }
 
+  /** Trace a Data name. */
   def traceName(x: Data): Unit = {
     x match {
       case aggregate: Aggregate =>
@@ -38,7 +40,6 @@ object trace {
   case class TraceNameAnnotation[T <: CompleteTarget](target: T, chiselTarget: T)
     extends SingleTargetAnnotation[T]
       with HasChiselTarget[T] {
-    // rename map only update target, hash is to used to match via the view API.
     def duplicate(n: T): Annotation = this.copy(target = n)
   }
 
