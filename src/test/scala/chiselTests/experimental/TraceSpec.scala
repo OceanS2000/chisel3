@@ -4,7 +4,7 @@ package chiselTests
 
 import chisel3._
 import chisel3.experimental.ChiselEnum
-import chisel3.experimental.DataMirror.trace.{traceName, TraceFromAnnotations}
+import chisel3.experimental.trace._
 import chisel3.stage.{ChiselGeneratorAnnotation, ChiselStage, DesignAnnotation}
 import chisel3.util.experimental.InlineInstance
 import firrtl.AnnotationSeq
